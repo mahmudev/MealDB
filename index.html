@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>mealdb</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.0/dist/full.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" /> </head>
+
+<body>
+	<header>
+		<!-- Navbar -->
+		<nav class="flex justify-between mx-20 py-5">
+			<h1 class="text-xl md:text-2xl font-bold">Tasty HUT</h1>
+			<button class="px-4 py-2 text-base md:text-xl font-bold bg-[#FFC107] text-black rounded-md text-center hover:scale-[0.9] duration-300"> Sign up </button>
+		</nav>
+		<!-- Banner section -->
+		<div class="bg-[url('/img/banner_1.png')] h-[100vh] w-full bg-cover bg-center">
+			<div class="w-full h-full text-center backdrop-brightness-50 flex justify-center items-center">
+				<div class="flex flex-col items-center">
+					<h1 class="text-2xl md:text-6xl font-bold text-white">
+              Taste Our Delicious <br />
+              Best Foods
+            </h1>
+					<p class="text-sm md:text-base font-medium text-slate-300 my-3"> There are many variations of passages of Lorem Ipsum available, but the majority have
+						<br /> suffered alteration in some form, by injected humou. </p>
+					<div class="w-[90%] flex justify-center h-12 mt-5">
+						<input id="search-field" class="w-[80%] pl-4 outline-none h-full rounded-l-md" type="text" placeholder="Search any food" />
+						<button id="btn-search" class="w-[20%] px-3 py-1 text-black font-bold text-xl bg-[#FFC107] h-full rounded-r-md hover:bg-gray-500 hover:text-white"> Search </button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<main>
+		<!-- component -->
+		<section class="bg-white container mx-auto">
+			<div class="container px-6 py-10 mx-auto">
+				<h1 class="text-3xl font-semibold text-black text-center lg:text-4xl">
+            Your Favourite Food
+          </h1>
+				<div id="meals-container" class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2"></div>
+				<div class="flex justify-center my-4">
+					<div id="spinner" class="hidden" role="status">
+						<svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+							<path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" /> </svg> <span class="sr-only">Loading...</span>
+						 </div>
+				</div>
+				<div class="flex justify-center my-4">
+					<button id="see-more" class="px-4 py-2 text-base md:text-xl font-bold bg-[#FFC107] text-black rounded-md text-center hover:scale-[0.9] duration-300"> See More... </button>
+				</div>
+				<div class="flex justify-center my-4">
+					<h1 id="error-message" class="text-3xl text-yellow-400 font-semibold text-black text-center lg:text-4xl">
+              No result found...
+            </h1> </div>
+			</div>
+		</section>
+		<section>
+			<div class="main-modal fixed lg:w-full h-100 inset-0 z-50 overflow-y-auto flex justify-center items-center animated fadeIn faster" style="background: rgba(0, 0, 0, 0.7)">
+				<div class="shadow-lg modal-container bg-white lg:w-6/12 mx-auto rounded shadow-lg z-50 overflow-y-auto">
+					<div class="modal-content py-4 text-left px-4">
+						<!--Title-->
+						<div class="flex justify-between items-center pb-3">
+							<p id="modal-title" class="text-2xl font-bold"></p>
+							<div class="modal-close cursor-pointer z-50">
+								<svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+									<path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+								</svg>
+							</div>
+						</div>
+						<!--Body-->
+						<div id="meals-details-body" class="my-1"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<footer class="mx-auto bg-[#FFFCF3] py-16 text-base-content">
+		<div class="container mx-auto footer p-10">
+			<div> <span class="footer-title">Home</span> <a class="link link-hover">Features</a> <a class="link link-hover">Pricing</a> <a class="link link-hover">FAQs</a> <a class="link link-hover">About</a> </div>
+			<div> <span class="footer-title">UIUX Design</span> <a class="link link-hover">Product Design</a> <a class="link link-hover">Back End Developer</a> <a class="link link-hover">Front End Developer</a> </div>
+			<div> <span class="footer-title">FAQ</span> <a class="link link-hover">Support</a> <a class="link link-hover">Privacy policy</a> <a class="link link-hover">Terms of Service</a> </div>
+			<div> <span class="footer-title">Subscribe to our newsletter</span>
+				<div class="form-control w-80">
+					<label class="label"> <span class="label-text">There are many variations of passages of available, but the
+                majority have suffered</span
+              >
+            </label>
+            <div class="relative">
+              <input
+                type="text"
+                placeholder="username@site.com"
+                class="input input-bordered rounded w-full pr-16"
+              />
+              <button
+                class="btn btn-primary bg-[#FFC107] text-black absolute top-0 right-0 rounded-l-none hover:bg-gray-500 hover:text-white"
+              >
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
