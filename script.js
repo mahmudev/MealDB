@@ -128,7 +128,7 @@ const displayMealDetails = (meal) => {
         <div> ${meal.strInstructions}
         </div>
         <div class="pt-2">
-        <ul class="grid grid-rows-4 grid-flow-col gap-2">
+        <ul class="grid grid-rows-4 grid-flow-col gap-1">
         ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
       </ul>
         </div>
