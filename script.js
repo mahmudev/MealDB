@@ -125,9 +125,11 @@ const displayMealDetails = (meal) => {
     <img class="object-cover w-full h-56 lg:h-80 rounded-lg" src="${meal.strMealThumb}" alt="">
     
     <div class="flex flex-col justify-between py-6 lg:mx-6">
+
         <div> ${meal.strInstructions}
         </div>
         <div class="pt-2">
+	    <h3 class="pt-2 font-bold">Ingredient</h3>
         <ul class="grid grid-rows-4 grid-flow-col gap-1">
         ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
       </ul>
