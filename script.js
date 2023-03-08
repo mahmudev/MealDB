@@ -127,7 +127,7 @@ const displayMealDetails = (meal) => {
     <div class="flex flex-col justify-between py-6 lg:mx-6">
         <div> ${meal.strInstructions}
         </div>
-        <div class="pt-2">
+        <div class="pt-2 grid grid-rows-4 grid-flow-col gap-2">
         <ul>
         ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
       </ul>
