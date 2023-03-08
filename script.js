@@ -108,6 +108,16 @@ const loadMealDetails = (idMeal) => {
 };
 
 const displayMealDetails = (meal) => {
+	const ingredients = [];
+	// Get all ingredients from the object. Up to 20
+	for(let i=1; i<=20; i++) {
+		if(meal[`strIngredient${i}`]) {
+			ingredients.push(`${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`)
+		} else {
+			// Stop if no more ingredients
+			break;
+		}
+  }
   // console.log(meal);
   document.getElementById("modal-title").innerText = meal.strMeal;
   const mealsDetails = document.getElementById("meals-details-body");
@@ -118,7 +128,9 @@ const displayMealDetails = (meal) => {
         <div> ${meal.strInstructions}
         </div>
         <div class="pt-2">
-        <h3><span class="font-bold">Ingredient:</span><span> ${meal.strIngredient1}</span>,<span> ${meal.strIngredient2}</span>,<span> ${meal.strIngredient3}</span>,<span> ${meal.strIngredient4}</span>,<span> ${meal.strIngredient5}</span>,<span> ${meal.strIngredient6}</span>,<span> ${meal.strIngredient7}</span>,<span> ${meal.strIngredient8}</span>,<span> ${meal.strIngredient9}</span>,<span> ${meal.strIngredient10}</span><h3>
+        <ul>
+        ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+      </ul>
         </div>
         <div class="pt-2">
         <h3><span class="font-bold">Youtube: </span><span><a target="_blank" href="${meal.strYoutube}"><span class="text-red-500">${meal.strYoutube}</span></a></span><h3>
